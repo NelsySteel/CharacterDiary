@@ -15,7 +15,11 @@ void UDnD_Skill::UpdateProficiency_Implementation(bool newValue)
 int UDnD_Skill::GetModifier_Implementation()
 {
 	const int skillProficiencyValue = Cast<UDNDSkillsSystemComponent>(SkillSystem)->ProficiencyValue;
-	int modifier = (CorrespondingAbility->GetModifier() - 10) / 2;
+
+	int modifier = 0;
+	if (CorrespondingAbility)
+		modifier = (CorrespondingAbility->GetModifier() - 10) / 2;
+	
 	if (IsProficient) modifier += skillProficiencyValue;
 	return modifier;
 }

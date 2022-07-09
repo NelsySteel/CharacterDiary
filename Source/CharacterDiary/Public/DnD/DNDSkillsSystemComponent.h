@@ -78,6 +78,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Skills")
 	int ProficiencyValue = 2;
+
+	UPROPERTY(BlueprintReadOnly, Category="Skills")
+		TMap<int, UISkill*>			Skills;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Skills")
+		TMap<int, UIAbility*>		Abilities;
 private:
 	TArray<FString> SkillNames = {
 		"Acrobatics",
@@ -111,10 +117,5 @@ private:
 		"None"
 	};
 
-	UPROPERTY()
-	TMap<int, UISkill*>			m_skills;
-
-	UPROPERTY()
-	TMap<int, UIAbility*>		m_abilities;
 
 };

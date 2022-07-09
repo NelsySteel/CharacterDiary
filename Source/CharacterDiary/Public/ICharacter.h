@@ -32,8 +32,11 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "System")
 	UIGameSystem*	WorldSystem;
 
-	// UPROPERTY(BlueprintReadOnly, VisibleAnywhere, AdvancedDisplay, Category="Components")
-	// USkillsSystemComponent* SkillsSystem;
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Skills")
+	void OnSkillSystemReady();
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Components")
+	USkillsSystemComponent* SkillsSystem;
 private:
 	template<class TClass>
 	TClass* AddComponent(FName name);

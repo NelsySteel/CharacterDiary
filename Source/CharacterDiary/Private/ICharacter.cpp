@@ -22,10 +22,9 @@ void AICharacter::BeginPlay()
 	case DND: 
 	{
 		WorldSystem = NewObject<UDnDGameSystem>();
-		UDNDSkillsSystemComponent* SkillsSystem = AddComponent<UDNDSkillsSystemComponent>("SkillSystem");
+		SkillsSystem = AddComponent<UDNDSkillsSystemComponent>("SkillSystem");
 		SkillsSystem->Initialize(WorldSystem);
-		auto test = GetComponentByClass(USkillsSystemComponent::StaticClass());
-		test->RegisterComponent();
+		OnSkillSystemReady();
 		break;
 	}
 	case Systems_COUNT: break;

@@ -28,7 +28,7 @@ UDnD_Skill* UDNDSkillsSystemComponent::CreateSkill_Implementation(int Key, const
 	skill->SkillSystem = this;
 	skill->Name = Name;
 	skill->m_modifier = Modifier;
-	skill->CorrespondingAbility = m_abilities[AbilityEnum];
+	skill->CorrespondingAbility = Abilities[AbilityEnum];
 	skill->IsProficient = IsProficient;
 	return skill;
 }
@@ -59,13 +59,13 @@ void UDNDSkillsSystemComponent::PostInitialize_Implementation()
 	{
 		for (int i = 0; i <= Ability::ABILITY_COUNT; i++)
 		{
-			m_abilities.Add(i, CreateAbilityObject(i));
+			Abilities.Add(i, CreateAbilityObject(i));
 		}
 
 		for (int i = 0; i<= Skill::SKILL_COUNT; i++)
 		{
 			FString skillName = SkillNames[i];
-			m_skills.Add(i, CreateSkill(i, skillName, 0, Ability::ABILITY_COUNT, false));
+			Skills.Add(i, CreateSkill(i, skillName, 0, Ability::ABILITY_COUNT, false));
 		}
 	}
 }
@@ -75,6 +75,6 @@ TArray<UISkill*> UDNDSkillsSystemComponent::GetAllSkills()
 {
 
 	TArray<UISkill*> result;
-	m_skills.GenerateValueArray(result);
+	Skills.GenerateValueArray(result);
 	return result;
 }
