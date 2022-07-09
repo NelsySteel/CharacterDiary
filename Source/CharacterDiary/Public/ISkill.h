@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "ISkill.generated.h"
 
+class USkillsSystemComponent;
 /**
  * 
  */
@@ -12,25 +13,23 @@ UCLASS(ClassGroup = "Skills", Blueprintable, BlueprintType)
 class CHARACTERDIARY_API UISkill : public UObject
 {
 	GENERATED_BODY()
+	friend USkillsSystemComponent;
 public:
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
+	int			GetModifier();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
-	int	GetKey();
-	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
-	FString GetName();
-	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
-	int		GetModifier();
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	FString		Name;
 
+	UPROPERTY(EditInstanceOnly, Category = "System")
+	USkillsSystemComponent* SkillSystem;
+
+	UPROPERTY(BlueprintReadOnly)
+	int			Key;
 
 protected:
 	UISkill() {}
-	UISkill(int key, FString name, int modifier) : m_key(key), m_name(name), m_modifier(modifier) {}
 	~UISkill();
-	
-	
-	int			m_key;
-	FString		m_name;
+
 	int			m_modifier;
 };

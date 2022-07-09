@@ -3,6 +3,9 @@
 
 #include "SkillsSystemComponent.h"
 
+#include "ISkill.h"
+
+
 // Sets default values for this component's properties
 USkillsSystemComponent::USkillsSystemComponent()
 {
@@ -11,6 +14,22 @@ USkillsSystemComponent::USkillsSystemComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+}
+
+UISkill* USkillsSystemComponent::CreateBaseSkill_Implementation(int key, const FString& name,
+	int modifier)
+{
+	auto skill = NewObject<UISkill>(this, UISkill::StaticClass(), FName(name));
+	skill->Key = key;
+	skill->SkillSystem = this;
+	skill->Name = name;
+	skill->m_modifier = modifier;
+	return skill;
+}
+
+void USkillsSystemComponent::Initialize_Implementation(UIGameSystem* system)
+{
+	WorldSystem = system;
 }
 
 

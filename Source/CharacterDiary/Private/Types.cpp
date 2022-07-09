@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "IGameSystem.h"
+#include "Types.h"
 
-UIGameSystem::UIGameSystem()
+Types::Types()
 {
 }
 
-UIGameSystem::~UIGameSystem()
+Types::~Types()
 {
 }

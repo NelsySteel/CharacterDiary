@@ -3,19 +3,19 @@
 
 #include "DnD/Public/DnDSkill.h"
 
-UDnDSkill::UDnDSkill(int key, FString name, UIAbility* ability, bool proficiency) : UISkill(key, name, 0)
+#include "DnD/DNDSkillsSystemComponent.h"
+
+void UDnD_Skill::UpdateProficiency_Implementation(bool newValue)
 {
-	
+	IsProficient = newValue;
+
+	// Event to recount all values in UI
 }
 
-int UDnDSkill::GetModifier_Implementation()
+int UDnD_Skill::GetModifier_Implementation()
 {
-	auto modifier = (GetAbility()->GetModifier() - 10) / 2;
+	const int skillProficiencyValue = Cast<UDNDSkillsSystemComponent>(SkillSystem)->ProficiencyValue;
+	int modifier = (CorrespondingAbility->GetModifier() - 10) / 2;
+	if (IsProficient) modifier += skillProficiencyValue;
 	return modifier;
-}
-
-
-UIAbility* UDnDSkill::GetAbility_Implementation()
-{
-	return m_correspondingAbility;
 }

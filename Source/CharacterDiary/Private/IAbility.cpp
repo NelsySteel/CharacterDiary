@@ -13,5 +13,5 @@ UIAbility::~UIAbility()
 
 int UIAbility::GetModifier_Implementation()
 {
-	return m_modifier;
+	return Modifier;
 }

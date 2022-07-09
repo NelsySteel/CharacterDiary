@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "IGameSystem.generated.h"
 
+class USkillsSystemComponent;
 class UISkill;
 /**
  *
@@ -14,8 +15,8 @@ class CHARACTERDIARY_API UIGameSystem: public UObject
 {
 	GENERATED_BODY()
 public:
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category="Skills")
-	TArray<UISkill*> CreateSkills();
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components")
+	TSubclassOf<USkillsSystemComponent> SkillSystemClass;
 protected:
 	UIGameSystem();
 	~UIGameSystem();

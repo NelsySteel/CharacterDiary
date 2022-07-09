@@ -7,26 +7,27 @@
 #include "IAbility.h"
 #include "DnDSkill.generated.h"
 
+class UDNDSkillsSystemComponent;
 /**
  * 
  */
 UCLASS()
-class CHARACTERDIARY_API UDnDSkill : public UISkill
+class CHARACTERDIARY_API UDnD_Skill : public UISkill
 {
 	GENERATED_BODY()
+	friend UDNDSkillsSystemComponent;
 public:
-	UDnDSkill(int key, FString name, UIAbility* ability, bool proficiency);
+	UDnD_Skill() : UISkill() {}
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
-	UIAbility* GetAbility();
+	void UpdateProficiency(bool newValue);
 	
 	virtual int GetModifier_Implementation() override;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	UIAbility* CorrespondingAbility;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool		IsProficient;
+
 protected:
-	UDnDSkill() : UISkill() {}
-
-	UPROPERTY()
-	UIAbility*	m_correspondingAbility;
-
-	bool		m_isProficient;
-
 };

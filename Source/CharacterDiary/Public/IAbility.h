@@ -15,12 +15,12 @@ class CHARACTERDIARY_API UIAbility: public UObject
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
-	int GetModifier();
-protected:
 	UIAbility();
 	~UIAbility();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
+	int GetModifier();
 
-	bool m_modifier;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int Modifier;
 };
