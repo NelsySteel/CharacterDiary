@@ -67,8 +67,6 @@ void UDNDSkillsSystemComponent::PostInitialize_Implementation()
 			FString skillName = SkillNames[i];
 			m_skills.Add(i, CreateSkill(i, skillName, 0, Ability::ABILITY_COUNT, false));
 		}
-
-		
 	}
 }
 
