@@ -19,10 +19,10 @@ public:
 	~UIAbility();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
-	int GetModifier();
+		int32  GetModifier();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int Modifier;
+		int32  Modifier;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	FString		Name;

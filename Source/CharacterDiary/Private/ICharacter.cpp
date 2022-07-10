@@ -19,15 +19,15 @@ void AICharacter::BeginPlay()
 
 	switch (WorldSystemEnum)
 	{
-	case DND: 
+	case System::DND: 
 	{
 		WorldSystem = NewObject<UDnDGameSystem>();
-		SkillsSystem = AddComponent<UDNDSkillsSystemComponent>("SkillSystem");
+		SkillsSystem = AddComponent<USkillsSystemComponent>("SkillSystem");
 		SkillsSystem->Initialize(WorldSystem);
 		OnSkillSystemReady();
 		break;
 	}
-	case Systems_COUNT: break;
+	case System::Systems_COUNT: break;
 	default: ;
 	}
 	Super::BeginPlay();

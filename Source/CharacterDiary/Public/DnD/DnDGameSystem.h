@@ -14,4 +14,5 @@ class CHARACTERDIARY_API UDnDGameSystem : public UIGameSystem
 {
 	GENERATED_BODY()
 public:
+	UDnDGameSystem();
 };

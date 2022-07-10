@@ -13,7 +13,7 @@ class UISkill;
  */
 
 UENUM(Blueprintable, BlueprintType)
-enum Skill
+enum class ESkill : uint8
 {
 	ACROBATICS				UMETA(DisplayName = "Acrobatics"),
 	ANIMAL_HANDLING			UMETA(DisplayName = "Animal Handling"),
@@ -37,7 +37,7 @@ enum Skill
 };
 
 UENUM(Blueprintable, BlueprintType)
-enum Ability
+enum class EAbility : uint8
 {
 	STRENGTH			UMETA(DisplayName = "Strength"),
 	DEXTERITY			UMETA(DisplayName = "Dexterity"),
@@ -61,10 +61,10 @@ public:
 	CreateBaseSkill_Implementation(int key, const FString& name, int modifier = 0) override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Skills")
-	UDnD_Skill* CreateSkill(int Key, const FString& Name, int Modifier, int AbilityEnum, bool IsProficient);
+	UDnD_Skill* CreateSkill(int Key, const FString& Name, int Modifier, EAbility AbilityEnum, bool IsProficient);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Skills")
-	UIAbility* CreateAbilityObject(int AbilityEnum);
+	UIAbility* CreateAbilityObject(EAbility AbilityEnum);
 
 	virtual void Initialize_Implementation(UIGameSystem* system) override;
 protected:
@@ -76,13 +76,13 @@ public:
 	TArray<UISkill*> GetAllSkills();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Skills")
-	int ProficiencyValue = 2;
+	int32  ProficiencyValue = 2;
 
 	UPROPERTY(BlueprintReadOnly, Category="Skills")
-		TMap<int, UISkill*>			Skills;
+		TMap<ESkill, UISkill*>			Skills;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Skills")
-		TMap<int, UIAbility*>		Abilities;
+		TMap<EAbility, UIAbility*>		Abilities;
 private:
 	TArray<FString> SkillNames = {
 		"Acrobatics",
@@ -116,7 +116,7 @@ private:
 		"None"
 	};
 
-	TMap<TEnumAsByte<Skill>, TEnumAsByte<Ability>> SkillCategories;
+	TMap<ESkill, EAbility> SkillCategories;
 
 
 };

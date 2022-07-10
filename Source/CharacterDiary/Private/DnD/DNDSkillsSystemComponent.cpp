@@ -11,24 +11,24 @@
 
 UDNDSkillsSystemComponent::UDNDSkillsSystemComponent() : USkillsSystemComponent()
 {
-	SkillCategories.Add(Skill::ACROBATICS, Ability::DEXTERITY);
-	SkillCategories.Add(Skill::ANIMAL_HANDLING, Ability::WISDOM);
-	SkillCategories.Add(Skill::ARCANA, Ability::INTELLIGENCE);
-	SkillCategories.Add(Skill::ATHLETICS, Ability::STRENGTH);
-	SkillCategories.Add(Skill::DECEPTION, Ability::CHARISMA);
-	SkillCategories.Add(Skill::HISTORY, Ability::INTELLIGENCE);
-	SkillCategories.Add(Skill::INSIGHT, Ability::WISDOM);
-	SkillCategories.Add(Skill::INTIMIDATION, Ability::CHARISMA);
-	SkillCategories.Add(Skill::INVESTIGATION, Ability::INTELLIGENCE);
-	SkillCategories.Add(Skill::MEDICINE, Ability::WISDOM);
-	SkillCategories.Add(Skill::NATURE, Ability::INTELLIGENCE);
-	SkillCategories.Add(Skill::PERCEPTION, Ability::WISDOM);
-	SkillCategories.Add(Skill::PERFORMANCE, Ability::CHARISMA);
-	SkillCategories.Add(Skill::PERSUASION, Ability::CHARISMA);
-	SkillCategories.Add(Skill::RELIGION, Ability::INTELLIGENCE);
-	SkillCategories.Add(Skill::SLEIGHT_OF_HAND, Ability::DEXTERITY);
-	SkillCategories.Add(Skill::STEALTH, Ability::DEXTERITY);
-	SkillCategories.Add(Skill::SURVIVAL, Ability::WISDOM);
+	SkillCategories.Add(ESkill::ACROBATICS, EAbility::DEXTERITY);
+	SkillCategories.Add(ESkill::ANIMAL_HANDLING, EAbility::WISDOM);
+	SkillCategories.Add(ESkill::ARCANA, EAbility::INTELLIGENCE);
+	SkillCategories.Add(ESkill::ATHLETICS, EAbility::STRENGTH);
+	SkillCategories.Add(ESkill::DECEPTION, EAbility::CHARISMA);
+	SkillCategories.Add(ESkill::HISTORY, EAbility::INTELLIGENCE);
+	SkillCategories.Add(ESkill::INSIGHT, EAbility::WISDOM);
+	SkillCategories.Add(ESkill::INTIMIDATION, EAbility::CHARISMA);
+	SkillCategories.Add(ESkill::INVESTIGATION, EAbility::INTELLIGENCE);
+	SkillCategories.Add(ESkill::MEDICINE, EAbility::WISDOM);
+	SkillCategories.Add(ESkill::NATURE, EAbility::INTELLIGENCE);
+	SkillCategories.Add(ESkill::PERCEPTION, EAbility::WISDOM);
+	SkillCategories.Add(ESkill::PERFORMANCE, EAbility::CHARISMA);
+	SkillCategories.Add(ESkill::PERSUASION, EAbility::CHARISMA);
+	SkillCategories.Add(ESkill::RELIGION, EAbility::INTELLIGENCE);
+	SkillCategories.Add(ESkill::SLEIGHT_OF_HAND, EAbility::DEXTERITY);
+	SkillCategories.Add(ESkill::STEALTH, EAbility::DEXTERITY);
+	SkillCategories.Add(ESkill::SURVIVAL, EAbility::WISDOM);
 
 }
 
@@ -44,7 +44,7 @@ UISkill* UDNDSkillsSystemComponent::CreateBaseSkill_Implementation(int key, cons
 	return skill;
 }
 
-UDnD_Skill* UDNDSkillsSystemComponent::CreateSkill_Implementation(int Key, const FString& Name, int Modifier, int AbilityEnum, bool IsProficient)
+UDnD_Skill* UDNDSkillsSystemComponent::CreateSkill_Implementation(int Key, const FString& Name, int Modifier, EAbility AbilityEnum, bool IsProficient)
 {
 	auto skill = NewObject<UDnD_Skill>(this, UDnD_Skill::StaticClass(), FName(Name));
 	skill->Key = Key;
@@ -57,10 +57,11 @@ UDnD_Skill* UDNDSkillsSystemComponent::CreateSkill_Implementation(int Key, const
 }
 
 
-UIAbility* UDNDSkillsSystemComponent::CreateAbilityObject_Implementation(int AbilityEnum)
+UIAbility* UDNDSkillsSystemComponent::CreateAbilityObject_Implementation(EAbility AbilityEnum)
 {
-	auto AbilityObject = NewObject<UIAbility>(this, UIAbility::StaticClass(), FName(AbilityNames[AbilityEnum]));
-	AbilityObject->Name = AbilityNames[AbilityEnum];
+	int abilityIndex = static_cast<uint8>(AbilityEnum);
+	auto AbilityObject = NewObject<UIAbility>(this, UIAbility::StaticClass(), FName(AbilityNames[abilityIndex]));
+	AbilityObject->Name = AbilityNames[abilityIndex];
 	AbilityObject->Modifier = 10;
 	return AbilityObject;
 }
@@ -82,16 +83,17 @@ void UDNDSkillsSystemComponent::PostInitialize_Implementation()
 {
 	if (WorldSystem)
 	{
-		for (int i = 0; i <= Ability::ABILITY_COUNT; i++)
+		for (int i = 0; i <= static_cast<uint8>(EAbility::ABILITY_COUNT); i++)
 		{
-			Abilities.Add(i, CreateAbilityObject(i));
+			EAbility abilityEnum = static_cast<EAbility>(i);
+			Abilities.Add(abilityEnum, CreateAbilityObject(abilityEnum));
 		}
 
-		for (int i = 0; i<= Skill::SKILL_COUNT; i++)
+		for (int i = 0; i<= static_cast<uint8>(ESkill::SKILL_COUNT); i++)
 		{
 			FString skillName = SkillNames[i];
-			Skill skillEnum = static_cast<Skill>(i);
-			Skills.Add(i, CreateSkill(i, skillName, 0, skillEnum!=Skill::SKILL_COUNT ? SkillCategories[skillEnum] : Ability::ABILITY_COUNT, false));
+			ESkill skillEnum = static_cast<ESkill>(i);
+			Skills.Add(skillEnum, CreateSkill(i, skillName, 0, skillEnum != ESkill::SKILL_COUNT ? SkillCategories[skillEnum] : EAbility::ABILITY_COUNT, false));
 		}
 	}
 }

@@ -2,3 +2,10 @@
 
 
 #include "DnD/DnDGameSystem.h"
+
+#include "DnD/DNDSkillsSystemComponent.h"
+
+UDnDGameSystem::UDnDGameSystem()
+{
+	SkillSystemClass = UDNDSkillsSystemComponent::StaticClass();
+}

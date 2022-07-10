@@ -8,7 +8,7 @@ UISkill::~UISkill()
 {
 }
 
-int UISkill::GetModifier_Implementation()
+int32  UISkill::GetModifier_Implementation()
 {
 	return m_modifier;
 }

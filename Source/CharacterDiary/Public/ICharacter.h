@@ -27,7 +27,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "System")
-	TEnumAsByte<System>			WorldSystemEnum;
+	System			WorldSystemEnum;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "System")
 	UIGameSystem*	WorldSystem;
@@ -45,9 +45,8 @@ private:
 template <class TClass>
 TClass* AICharacter::AddComponent(FName name)
 {
-	UActorComponent* NewComp = NewObject<UActorComponent>(this, TClass::StaticClass(), name);
-	TClass* comp = Cast<TClass>(NewComp);
-	comp->RegisterComponent();
-	AddInstanceComponent(comp);
-	return comp;
+	UActorComponent* NewComp = NewObject<TClass>(this, WorldSystem->SkillSystemClass, name);
+	NewComp->RegisterComponent();
+	AddInstanceComponent(NewComp);
+	return Cast<TClass>(NewComp);;
 }

@@ -17,6 +17,8 @@ class CHARACTERDIARY_API UIGameSystem: public UObject
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components")
 	TSubclassOf<USkillsSystemComponent> SkillSystemClass;
+
+
 protected:
 	UIGameSystem();
 	~UIGameSystem();

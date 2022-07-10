@@ -16,7 +16,7 @@ class CHARACTERDIARY_API UISkill : public UObject
 	friend USkillsSystemComponent;
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
-	int			GetModifier();
+	int32		GetModifier();
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	FString		Name;
@@ -25,7 +25,7 @@ public:
 	USkillsSystemComponent* SkillSystem;
 
 	UPROPERTY(BlueprintReadOnly)
-	int			Key;
+	int32		Key;
 
 protected:
 	UISkill() {}

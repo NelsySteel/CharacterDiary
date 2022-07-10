@@ -11,7 +11,7 @@ UIAbility::~UIAbility()
 {
 }
 
-int UIAbility::GetModifier_Implementation()
+int32  UIAbility::GetModifier_Implementation()
 {
 	return Modifier;
 }

@@ -9,7 +9,7 @@
  */
 
 UENUM(Blueprintable, BlueprintType)
-enum System
+enum class System : uint8
 {
 	DND			UMETA(DisplayName = "DnD"),
 	Systems_COUNT		UMETA(DisplayName = "None")
