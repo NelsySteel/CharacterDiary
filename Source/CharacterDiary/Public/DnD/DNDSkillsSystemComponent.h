@@ -18,7 +18,7 @@ enum Skill
 	ACROBATICS				UMETA(DisplayName = "Acrobatics"),
 	ANIMAL_HANDLING			UMETA(DisplayName = "Animal Handling"),
 	ARCANA					UMETA(DisplayName = "Arcana"),
-	ATLETICS				UMETA(DisplayName = "Athletics"),
+	ATHLETICS				UMETA(DisplayName = "Athletics"),
 	DECEPTION				UMETA(DisplayName = "Deception"),
 	HISTORY					UMETA(DisplayName = "History"),
 	INSIGHT					UMETA(DisplayName = "Insight"),
@@ -56,8 +56,7 @@ class CHARACTERDIARY_API UDNDSkillsSystemComponent : public USkillsSystemCompone
 	GENERATED_BODY()
 	friend UDnD_Skill;
 public:
-	UDNDSkillsSystemComponent() : USkillsSystemComponent() {}
-
+	UDNDSkillsSystemComponent();
 	virtual UISkill*
 	CreateBaseSkill_Implementation(int key, const FString& name, int modifier = 0) override;
 	
@@ -116,6 +115,8 @@ private:
 		"CHARISMA",
 		"None"
 	};
+
+	TMap<TEnumAsByte<Skill>, TEnumAsByte<Ability>> SkillCategories;
 
 
 };

@@ -9,6 +9,29 @@
 #include "DnD/Public/DnDSkill.h"
 #include "IAbility.h"
 
+UDNDSkillsSystemComponent::UDNDSkillsSystemComponent() : USkillsSystemComponent()
+{
+	SkillCategories.Add(Skill::ACROBATICS, Ability::DEXTERITY);
+	SkillCategories.Add(Skill::ANIMAL_HANDLING, Ability::WISDOM);
+	SkillCategories.Add(Skill::ARCANA, Ability::INTELLIGENCE);
+	SkillCategories.Add(Skill::ATHLETICS, Ability::STRENGTH);
+	SkillCategories.Add(Skill::DECEPTION, Ability::CHARISMA);
+	SkillCategories.Add(Skill::HISTORY, Ability::INTELLIGENCE);
+	SkillCategories.Add(Skill::INSIGHT, Ability::WISDOM);
+	SkillCategories.Add(Skill::INTIMIDATION, Ability::CHARISMA);
+	SkillCategories.Add(Skill::INVESTIGATION, Ability::INTELLIGENCE);
+	SkillCategories.Add(Skill::MEDICINE, Ability::WISDOM);
+	SkillCategories.Add(Skill::NATURE, Ability::INTELLIGENCE);
+	SkillCategories.Add(Skill::PERCEPTION, Ability::WISDOM);
+	SkillCategories.Add(Skill::PERFORMANCE, Ability::CHARISMA);
+	SkillCategories.Add(Skill::PERSUASION, Ability::CHARISMA);
+	SkillCategories.Add(Skill::RELIGION, Ability::INTELLIGENCE);
+	SkillCategories.Add(Skill::SLEIGHT_OF_HAND, Ability::DEXTERITY);
+	SkillCategories.Add(Skill::STEALTH, Ability::DEXTERITY);
+	SkillCategories.Add(Skill::SURVIVAL, Ability::WISDOM);
+
+}
+
 UISkill* UDNDSkillsSystemComponent::CreateBaseSkill_Implementation(int key, const FString& Name, int Modifier)
 {
 	auto skill = NewObject<UDnD_Skill>(this, UDnD_Skill::StaticClass(), FName(Name));
@@ -37,6 +60,8 @@ UDnD_Skill* UDNDSkillsSystemComponent::CreateSkill_Implementation(int Key, const
 UIAbility* UDNDSkillsSystemComponent::CreateAbilityObject_Implementation(int AbilityEnum)
 {
 	auto AbilityObject = NewObject<UIAbility>(this, UIAbility::StaticClass(), FName(AbilityNames[AbilityEnum]));
+	AbilityObject->Name = AbilityNames[AbilityEnum];
+	AbilityObject->Modifier = 10;
 	return AbilityObject;
 }
 
@@ -65,7 +90,8 @@ void UDNDSkillsSystemComponent::PostInitialize_Implementation()
 		for (int i = 0; i<= Skill::SKILL_COUNT; i++)
 		{
 			FString skillName = SkillNames[i];
-			Skills.Add(i, CreateSkill(i, skillName, 0, Ability::ABILITY_COUNT, false));
+			Skill skillEnum = static_cast<Skill>(i);
+			Skills.Add(i, CreateSkill(i, skillName, 0, skillEnum!=Skill::SKILL_COUNT ? SkillCategories[skillEnum] : Ability::ABILITY_COUNT, false));
 		}
 	}
 }

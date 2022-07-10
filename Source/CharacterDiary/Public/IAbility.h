@@ -23,4 +23,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int Modifier;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	FString		Name;
 };
