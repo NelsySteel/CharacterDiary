@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SkillsSystemComponent.h"
-#include "Public/DnDSkill.h"
+#include "Components/SkillsSystemComponent.h"
+#include "DnDSkill.h"
 #include "DNDSkillsSystemComponent.generated.h"
 
 class UISkill;

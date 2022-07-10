@@ -6,7 +6,7 @@
 #include "IGameSystem.h"
 #include "ISkill.h"
 #include "DnD/DnDGameSystem.h"
-#include "DnD/Public/DnDSkill.h"
+#include "DnD/DnDSkill.h"
 #include "IAbility.h"
 
 UDNDSkillsSystemComponent::UDNDSkillsSystemComponent() : USkillsSystemComponent()
