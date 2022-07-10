@@ -66,7 +66,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Skills")
 	UIAbility* CreateAbilityObject(EAbility AbilityEnum);
 
-	virtual void Initialize_Implementation(UIGameSystem* system) override;
+	virtual void Initialize_Implementation(UIWorldSystem* system) override;
 protected:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Initialization")

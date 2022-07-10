@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "DnD/DnDGameSystem.h"
+#include "DnD/DnDWorldSystem.h"
 
 #include "DnD/DNDSkillsSystemComponent.h"
 
-UDnDGameSystem::UDnDGameSystem()
+UDnDWorldSystem::UDnDWorldSystem()
 {
 	SkillSystemClass = UDNDSkillsSystemComponent::StaticClass();
 }

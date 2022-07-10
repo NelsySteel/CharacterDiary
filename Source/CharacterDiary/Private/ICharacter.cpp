@@ -3,7 +3,7 @@
 
 #include "ICharacter.h"
 #include "DnD/DNDSkillsSystemComponent.h"
-#include "DnD/DnDGameSystem.h"
+#include "DnD/DnDWorldSystem.h"
 
 // Sets default values
 AICharacter::AICharacter()
@@ -21,7 +21,7 @@ void AICharacter::BeginPlay()
 	{
 	case System::DND: 
 	{
-		WorldSystem = NewObject<UDnDGameSystem>();
+		WorldSystem = NewObject<UDnDWorldSystem>();
 		SkillsSystem = AddComponent<USkillsSystemComponent>("SkillSystem");
 		SkillsSystem->Initialize(WorldSystem);
 		OnSkillSystemReady();

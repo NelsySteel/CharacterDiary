@@ -8,7 +8,7 @@
 
 
 class UISkill;
-class UIGameSystem;
+class UIWorldSystem;
 UCLASS( )
 class CHARACTERDIARY_API USkillsSystemComponent : public UActorComponent
 {
@@ -23,7 +23,7 @@ public:
 	UISkill* CreateBaseSkill(int key, const FString& name, int modifier = 0);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Initialization")
-	void Initialize(UIGameSystem* system);
+	void Initialize(UIWorldSystem* system);
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -33,5 +33,5 @@ protected:
 
 public:	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "System")
-	UIGameSystem* WorldSystem;
+	UIWorldSystem* WorldSystem;
 };

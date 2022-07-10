@@ -3,16 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "IGameSystem.h"
-#include "DnDGameSystem.generated.h"
+#include "IWorldSystem.h"
+#include "DnDWorldSystem.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CHARACTERDIARY_API UDnDGameSystem : public UIGameSystem
+class CHARACTERDIARY_API UDnDWorldSystem : public UIWorldSystem
 {
 	GENERATED_BODY()
 public:
-	UDnDGameSystem();
+	UDnDWorldSystem();
 };

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "IGameSystem.generated.h"
+#include "IWorldSystem.generated.h"
 
 class USkillsSystemComponent;
 class UISkill;
@@ -11,7 +11,7 @@ class UISkill;
  *
  */
 UCLASS(ClassGroup = "GameSystem", Blueprintable, BlueprintType)
-class CHARACTERDIARY_API UIGameSystem: public UObject
+class CHARACTERDIARY_API UIWorldSystem: public UObject
 {
 	GENERATED_BODY()
 public:
@@ -20,6 +20,6 @@ public:
 
 
 protected:
-	UIGameSystem();
-	~UIGameSystem();
+	UIWorldSystem();
+	~UIWorldSystem();
 };

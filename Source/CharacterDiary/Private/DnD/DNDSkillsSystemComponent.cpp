@@ -3,9 +3,9 @@
 
 #include "DnD/DNDSkillsSystemComponent.h"
 
-#include "IGameSystem.h"
+#include "IWorldSystem.h"
 #include "ISkill.h"
-#include "DnD/DnDGameSystem.h"
+#include "DnD/DnDWorldSystem.h"
 #include "DnD/DnDSkill.h"
 #include "IAbility.h"
 
@@ -66,10 +66,10 @@ UIAbility* UDNDSkillsSystemComponent::CreateAbilityObject_Implementation(EAbilit
 	return AbilityObject;
 }
 
-void UDNDSkillsSystemComponent::Initialize_Implementation(UIGameSystem* system)
+void UDNDSkillsSystemComponent::Initialize_Implementation(UIWorldSystem* system)
 {
 	Super::Initialize_Implementation(system);
-	UDnDGameSystem* worldSystem = Cast<UDnDGameSystem>(WorldSystem);
+	UDnDWorldSystem* worldSystem = Cast<UDnDWorldSystem>(WorldSystem);
 	if (!worldSystem)
 	{
 		//Wrong system!

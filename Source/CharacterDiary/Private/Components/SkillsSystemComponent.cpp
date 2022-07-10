@@ -27,7 +27,7 @@ UISkill* USkillsSystemComponent::CreateBaseSkill_Implementation(int key, const F
 	return skill;
 }
 
-void USkillsSystemComponent::Initialize_Implementation(UIGameSystem* system)
+void USkillsSystemComponent::Initialize_Implementation(UIWorldSystem* system)
 {
 	WorldSystem = system;
 }

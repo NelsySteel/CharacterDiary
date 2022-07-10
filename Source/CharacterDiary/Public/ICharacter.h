@@ -8,7 +8,7 @@
 #include "ICharacter.generated.h"
 
 class USkillsSystemComponent;
-class UIGameSystem;
+class UIWorldSystem;
 UCLASS(ClassGroup = "Game", BlueprintType, Blueprintable)
 class CHARACTERDIARY_API AICharacter : public AActor
 {
@@ -30,7 +30,7 @@ public:
 	System			WorldSystemEnum;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "System")
-	UIGameSystem*	WorldSystem;
+	UIWorldSystem*	WorldSystem;
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Skills")
 	void OnSkillSystemReady();
