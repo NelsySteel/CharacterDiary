@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "DnD/DNDSkillsSystemComponent.h"
+#include "Skills/DnD/DNDSkillsSystemComponent.h"
 
 #include "IWorldSystem.h"
-#include "ISkill.h"
+#include "Skills/ISkill.h"
 #include "DnD/DnDWorldSystem.h"
-#include "DnD/DnDSkill.h"
+#include "Skills/DnD/DnDSkill.h"
 #include "IAbility.h"
 
 UDNDSkillsSystemComponent::UDNDSkillsSystemComponent() : USkillsSystemComponent()
@@ -32,17 +32,6 @@ UDNDSkillsSystemComponent::UDNDSkillsSystemComponent() : USkillsSystemComponent(
 
 }
 
-UISkill* UDNDSkillsSystemComponent::CreateBaseSkill_Implementation(int key, const FString& Name, int Modifier)
-{
-	auto skill = NewObject<UDnD_Skill>(this, UDnD_Skill::StaticClass(), FName(Name));
-	skill->Key = key;
-	skill->SkillSystem = this;
-	skill->Name = Name;
-	skill->m_modifier = Modifier;
-	skill->CorrespondingAbility = nullptr;
-	skill->IsProficient = false;
-	return skill;
-}
 
 UDnD_Skill* UDNDSkillsSystemComponent::CreateSkill_Implementation(int Key, const FString& Name, int Modifier, EAbility AbilityEnum, bool IsProficient)
 {
@@ -66,38 +55,24 @@ UIAbility* UDNDSkillsSystemComponent::CreateAbilityObject_Implementation(EAbilit
 	return AbilityObject;
 }
 
-void UDNDSkillsSystemComponent::Initialize_Implementation(UIWorldSystem* system)
+void UDNDSkillsSystemComponent::Initialize_Implementation()
 {
-	Super::Initialize_Implementation(system);
-	UDnDWorldSystem* worldSystem = Cast<UDnDWorldSystem>(WorldSystem);
-	if (!worldSystem)
+	Super::Initialize_Implementation();
+
+	for (int i = 0; i <= static_cast<uint8>(EAbility::ABILITY_COUNT); i++)
 	{
-		//Wrong system!
-		return;
+		EAbility abilityEnum = static_cast<EAbility>(i);
+		Abilities.Add(abilityEnum, CreateAbilityObject(abilityEnum));
 	}
-	PostInitialize();
+
+	for (int i = 0; i <= static_cast<uint8>(ESkill::SKILL_COUNT); i++)
+	{
+		FString skillName = SkillNames[i];
+		ESkill skillEnum = static_cast<ESkill>(i);
+		Skills.Add(skillEnum, CreateSkill(i, skillName, 0, skillEnum != ESkill::SKILL_COUNT ? SkillCategories[skillEnum] : EAbility::ABILITY_COUNT, false));
+	}
 
 }
-
-void UDNDSkillsSystemComponent::PostInitialize_Implementation()
-{
-	if (WorldSystem)
-	{
-		for (int i = 0; i <= static_cast<uint8>(EAbility::ABILITY_COUNT); i++)
-		{
-			EAbility abilityEnum = static_cast<EAbility>(i);
-			Abilities.Add(abilityEnum, CreateAbilityObject(abilityEnum));
-		}
-
-		for (int i = 0; i<= static_cast<uint8>(ESkill::SKILL_COUNT); i++)
-		{
-			FString skillName = SkillNames[i];
-			ESkill skillEnum = static_cast<ESkill>(i);
-			Skills.Add(skillEnum, CreateSkill(i, skillName, 0, skillEnum != ESkill::SKILL_COUNT ? SkillCategories[skillEnum] : EAbility::ABILITY_COUNT, false));
-		}
-	}
-}
-
 
 TArray<UISkill*> UDNDSkillsSystemComponent::GetAllSkills()
 {

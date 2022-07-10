@@ -2,7 +2,9 @@
 
 
 #include "ICharacter.h"
-#include "DnD/DNDSkillsSystemComponent.h"
+
+#include "Components/InventorySystemComponent.h"
+#include "Skills/DnD/DNDSkillsSystemComponent.h"
 #include "DnD/DnDWorldSystem.h"
 
 // Sets default values
@@ -16,15 +18,17 @@ AICharacter::AICharacter()
 // Called when the game starts or when spawned
 void AICharacter::BeginPlay()
 {
-
 	switch (WorldSystemEnum)
 	{
 	case System::DND: 
 	{
 		WorldSystem = NewObject<UDnDWorldSystem>();
-		SkillsSystem = AddComponent<USkillsSystemComponent>("SkillSystem");
-		SkillsSystem->Initialize(WorldSystem);
+		SkillsSystem = AddComponent<USkillsSystemComponent>("SkillSystem", WorldSystem->SkillSystemClass);
+		SkillsSystem->Initialize();
 		OnSkillSystemReady();
+
+		InventorySystem = AddComponent<UInventorySystemComponent>("InventorySystem", WorldSystem->InventorySystemClass);
+		InventorySystem->Initialize();
 		break;
 	}
 	case System::Systems_COUNT: break;

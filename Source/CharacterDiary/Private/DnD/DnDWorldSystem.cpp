@@ -3,9 +3,11 @@
 
 #include "DnD/DnDWorldSystem.h"
 
-#include "DnD/DNDSkillsSystemComponent.h"
+#include "Components/InventorySystemComponent.h"
+#include "Skills/DnD/DNDSkillsSystemComponent.h"
 
 UDnDWorldSystem::UDnDWorldSystem()
 {
 	SkillSystemClass = UDNDSkillsSystemComponent::StaticClass();
+	InventorySystemClass = UInventorySystemComponent::StaticClass();
 }

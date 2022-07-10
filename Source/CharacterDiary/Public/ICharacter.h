@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "ICharacter.generated.h"
 
+class UInventorySystemComponent;
 class USkillsSystemComponent;
 class UIWorldSystem;
 UCLASS(ClassGroup = "Game", BlueprintType, Blueprintable)
@@ -37,15 +38,18 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category="Components")
 	USkillsSystemComponent* SkillsSystem;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UInventorySystemComponent* InventorySystem;
 private:
 	template<class TClass>
-	TClass* AddComponent(FName name);
+	TClass* AddComponent(FName name, TSubclassOf<UActorComponent> componentClass = TClass::StaticClass);
 };
 
 template <class TClass>
-TClass* AICharacter::AddComponent(FName name)
+TClass* AICharacter::AddComponent(FName name, TSubclassOf<UActorComponent> componentClass)
 {
-	UActorComponent* NewComp = NewObject<TClass>(this, WorldSystem->SkillSystemClass, name);
+	UActorComponent* NewComp = NewObject<TClass>(this, componentClass, name);
 	NewComp->RegisterComponent();
 	AddInstanceComponent(NewComp);
 	return Cast<TClass>(NewComp);;

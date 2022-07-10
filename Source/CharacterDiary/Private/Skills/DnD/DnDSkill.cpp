@@ -1,9 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "DnD/DnDSkill.h"
-
-#include "DnD/DNDSkillsSystemComponent.h"
+#include "Skills/DnD/DnDSkill.h"
+#include "Skills/DnD/DNDSkillsSystemComponent.h"
 
 void UDnD_Skill::UpdateProficiency_Implementation(bool newValue)
 {

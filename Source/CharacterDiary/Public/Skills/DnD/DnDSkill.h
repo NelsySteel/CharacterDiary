@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ISkill.h"
+#include "Skills/ISkill.h"
 #include "IAbility.h"
 #include "DnDSkill.generated.h"
 

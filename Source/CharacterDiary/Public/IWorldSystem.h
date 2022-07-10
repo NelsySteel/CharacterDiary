@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "IWorldSystem.generated.h"
 
+class UInventorySystemComponent;
 class USkillsSystemComponent;
 class UISkill;
 /**
@@ -17,6 +18,9 @@ class CHARACTERDIARY_API UIWorldSystem: public UObject
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components")
 	TSubclassOf<USkillsSystemComponent> SkillSystemClass;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components")
+	TSubclassOf<UInventorySystemComponent> InventorySystemClass;
 
 
 protected:

@@ -57,8 +57,6 @@ class CHARACTERDIARY_API UDNDSkillsSystemComponent : public USkillsSystemCompone
 	friend UDnD_Skill;
 public:
 	UDNDSkillsSystemComponent();
-	virtual UISkill*
-	CreateBaseSkill_Implementation(int key, const FString& name, int modifier = 0) override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Skills")
 	UDnD_Skill* CreateSkill(int Key, const FString& Name, int Modifier, EAbility AbilityEnum, bool IsProficient);
@@ -66,11 +64,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Skills")
 	UIAbility* CreateAbilityObject(EAbility AbilityEnum);
 
-	virtual void Initialize_Implementation(UIWorldSystem* system) override;
-protected:
+	virtual void Initialize_Implementation() override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Initialization")
-	void PostInitialize();
 public:
 	UFUNCTION(BlueprintCallable, Category = "Skills")
 	TArray<UISkill*> GetAllSkills();

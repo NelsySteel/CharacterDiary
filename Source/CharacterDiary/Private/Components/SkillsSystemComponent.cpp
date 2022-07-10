@@ -3,7 +3,7 @@
 
 #include "Components/SkillsSystemComponent.h"
 
-#include "ISkill.h"
+#include "Skills/ISkill.h"
 
 
 // Sets default values for this component's properties
@@ -16,20 +16,8 @@ USkillsSystemComponent::USkillsSystemComponent()
 	// ...
 }
 
-UISkill* USkillsSystemComponent::CreateBaseSkill_Implementation(int key, const FString& name,
-	int modifier)
+void USkillsSystemComponent::Initialize_Implementation()
 {
-	auto skill = NewObject<UISkill>(this, UISkill::StaticClass(), FName(name));
-	skill->Key = key;
-	skill->SkillSystem = this;
-	skill->Name = name;
-	skill->m_modifier = modifier;
-	return skill;
-}
-
-void USkillsSystemComponent::Initialize_Implementation(UIWorldSystem* system)
-{
-	WorldSystem = system;
 }
 
 

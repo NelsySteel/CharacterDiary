@@ -3,6 +3,9 @@
 
 #include "Components/InventorySystemComponent.h"
 
+#include "XmlFile.h"
+#include "XmlNode.h"
+
 // Sets default values for this component's properties
 UInventorySystemComponent::UInventorySystemComponent()
 {
@@ -10,15 +13,33 @@ UInventorySystemComponent::UInventorySystemComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
+	for (int i = 0; i < static_cast<uint8>(EBaseCurrency::CURRENCY_COUNT); i++)
+	{
+		Wallet.Values.Add(static_cast<EBaseCurrency>(i), 0);
+	}
 	// ...
 }
 
+void UInventorySystemComponent::Initialize_Implementation()
+{
+	
+}
+
+
+void UInventorySystemComponent::AddMoneyStruct(FBaseCurrency currency)
+{
+}
+
+void UInventorySystemComponent::AddMoney(EBaseCurrency currency, int32 value)
+{
+
+}
 
 // Called when the game starts
 void UInventorySystemComponent::BeginPlay()
 {
-	Super::BeginPlay();
 
+	Super::BeginPlay();
 	// ...
 	
 }
