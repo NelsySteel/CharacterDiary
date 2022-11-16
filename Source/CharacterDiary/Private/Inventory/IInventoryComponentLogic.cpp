@@ -3,3 +3,7 @@
 
 #include "Inventory/IInventoryComponentLogic.h"
 
+bool UIInventoryComponentLogic::LoadFromXML(FXmlNode* rootNode)
+{
+	return false;
+}

@@ -7,7 +7,8 @@
 #include "IInventoryComponentLogic.generated.h"
 
 
-class UIInventoryItemInfoDataAsset;
+class FXmlNode;
+class UIInventoryItemInfoObject;
 /**
  * 
  */
@@ -19,6 +20,5 @@ public:
 	UIInventoryComponentLogic() = default;
 	~UIInventoryComponentLogic() = default;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Data")
-	UIInventoryItemInfoDataAsset* data;
+	virtual bool LoadFromXML(FXmlNode* rootNode);
 };

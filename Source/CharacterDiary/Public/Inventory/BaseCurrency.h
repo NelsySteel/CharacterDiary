@@ -10,6 +10,7 @@
  * 
  */
 //
+
 UENUM(Blueprintable, BlueprintType)
 enum class EBaseCurrency : uint8
 {
@@ -19,17 +20,12 @@ enum class EBaseCurrency : uint8
 	CURRENCY_COUNT		UMETA(DisplayName = "None")
 };
 
-UCLASS(BlueprintType, Blueprintable, meta=(DisplayName = "Base Currency"))
-class CHARACTERDIARY_API UBaseCurrency:public UObject
+USTRUCT(BlueprintType, Blueprintable, meta=(DisplayName = "Base Currency"))
+struct CHARACTERDIARY_API FBaseCurrency
 {
 	GENERATED_BODY()
 public:
-	UFUNCTION(BlueprintCallable, Category = "Initialization")
-	void AddMoneyStruct(UBaseCurrency currency);
-
-	UFUNCTION(BlueprintCallable, Category = "Initialization")
-	void AddMoney(EBaseCurrency currency, int32 value);
-
+	FBaseCurrency();
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Currency")
 	TMap<EBaseCurrency, int32>	Values;
 };

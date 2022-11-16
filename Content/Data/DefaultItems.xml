@@ -1,0 +1,10 @@
+<items>
+    <sword>
+        <BaseInfo>
+            <Name>Short Sword</Name>
+            <Weight>2</Weight>
+            <Amount>1</Amount>
+            <Cost>10</Cost>
+        </BaseInfo>
+    </sword>
+</items>

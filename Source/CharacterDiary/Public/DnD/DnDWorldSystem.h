@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType, Blueprintable, ClassGroup = "DnD", meta = (DisplayName = "DnD Inventory System"))
 class CHARACTERDIARY_API UDnDWorldSystem : public UIWorldSystem
 {
 	GENERATED_BODY()

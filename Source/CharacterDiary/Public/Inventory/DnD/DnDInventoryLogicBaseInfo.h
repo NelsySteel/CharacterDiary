@@ -3,19 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Inventory/IInventoryItemInfoDataAsset.h"
-#include "BaseInventoryItemInfoDataAsset.generated.h"
+#include "../IInventoryComponentLogic.h"
+#include "DnDInventoryLogicBaseInfo.generated.h"
 
 
+class UBaseInventoryItemInfoObject;
 /**
  * 
  */
 UCLASS(BlueprintType, Blueprintable)
-class CHARACTERDIARY_API UBaseInventoryItemInfoDataAsset : public UIInventoryItemInfoDataAsset
+class CHARACTERDIARY_API UDnDInventoryLogicBaseInfo : public UIInventoryComponentLogic
 {
 	GENERATED_BODY()
 public:
-	UBaseInventoryItemInfoDataAsset();
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "ItemData")
 		FString	Name;
 
@@ -27,5 +28,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "ItemData")
 		uint8	Amount;
-
+protected:
+	virtual bool LoadFromXML(FXmlNode* rootNode) override;
 };
+

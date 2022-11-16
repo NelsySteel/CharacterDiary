@@ -3,21 +3,9 @@
 
 #include "Inventory/IInventoryObject.h"
 
-#include "Inventory/IInventoryItemInfoDataAsset.h"
-
-void UIInventoryObject::OnConstruct_Implementation(
-	TSubclassOf<UIInventoryComponentLogic> subclass)
-{
-
-}
-
 UIInventoryObject::UIInventoryObject()
 	:UObject()
 {
-	for (auto&& dataComponent : Components)
-	{
-		
-	}
 }
 
 UIInventoryComponentLogic* UIInventoryObject::GetComponentOfClass(TSubclassOf<UIInventoryComponentLogic> subclass)
@@ -25,16 +13,14 @@ UIInventoryComponentLogic* UIInventoryObject::GetComponentOfClass(TSubclassOf<UI
 	return GetComponentOfClass<UIInventoryComponentLogic>(subclass);
 }
 
-bool UIInventoryObject::CreateAndAddLogic(UIInventoryItemInfoDataAsset* data)
+UIInventoryComponentLogic* UIInventoryObject::CreateAndAddLogic(TSubclassOf<UIInventoryComponentLogic> logicClass, FName LogicName)
 {
-	TSubclassOf<UIInventoryComponentLogic> LogicClass = data->LogicClass;
-	UIInventoryComponentLogic* existingLogic = GetComponentOfClass(LogicClass);
-	if (existingLogic)
-	{
-		//Error?
-	}
-	UIInventoryComponentLogic* newLogic = NewObject<UIInventoryComponentLogic>(this, LogicClass, FName(data->LogicName));
-	newLogic->data = data;
+	UIInventoryComponentLogic* newLogic = NewObject<UIInventoryComponentLogic>(this, logicClass, LogicName);
 	ComponentsLogics.Add(newLogic);
-	return true;
+	return newLogic;
+}
+
+void UIInventoryObject::AddLogic(UIInventoryComponentLogic* logic)
+{
+	ComponentsLogics.Add(logic);
 }

@@ -22,3 +22,18 @@ int UDnD_Skill::GetModifier_Implementation()
 	if (IsProficient) modifier += skillProficiencyValue;
 	return modifier;
 }
+
+TMap<ESkillImprovementOrigin, int32> UDnD_Skill::GetModifier_FullInfo_Implementation()
+{
+	TMap<ESkillImprovementOrigin, int32> result;
+	if (CorrespondingAbility)
+	{
+		result.Add(ESkillImprovementOrigin::ABILITY, (CorrespondingAbility->GetModifier() - 10) / 2);
+	}
+	if (IsProficient)
+	{
+		const int skillProficiencyValue = Cast<UDNDSkillsSystemComponent>(SkillSystem)->ProficiencyValue;
+		result.Add(ESkillImprovementOrigin::PROFICIENCY, skillProficiencyValue);
+	}
+	return result;
+}

@@ -3,8 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/UserDefinedStruct.h"
-#include "Inventory/BaseCurrency.h"
 #include "DnDCurrency.generated.h"
 
 /**
@@ -26,7 +24,7 @@ struct CHARACTERDIARY_API FDnDCurrency
 {
 	GENERATED_BODY()
 public:
-
+	FDnDCurrency();
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Currency")
-	TMap<EBaseCurrency, int32>	Values;
+	TMap<EDnDCurrency, int32>	Values;
 };

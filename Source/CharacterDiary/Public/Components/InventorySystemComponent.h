@@ -8,10 +8,11 @@
 #include "InventorySystemComponent.generated.h"
 
 
+class UIInventoryComponentLogic;
 enum class EDnDCurrency : uint8;
 class UCurrency;
 class UIInventoryObject;
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(DnD), meta=(BlueprintSpawnableComponent) )
 class CHARACTERDIARY_API UInventorySystemComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -23,21 +24,19 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Initialization")
 	void Initialize();
 
-	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Items")
+		TArray<UIInventoryObject*>	Items;
 
-
+	virtual UIInventoryComponentLogic* CreateLogicFromName(const FString& name);
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	virtual void LoadDefaultItemsFromXML(const FString& fileName);
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Items")
-	TArray<UIInventoryObject*>	Items;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Money")
-	FBaseCurrency					Wallet;
 
 };

@@ -33,7 +33,7 @@ enum class ESkill : uint8
 	SLEIGHT_OF_HAND			UMETA(DisplayName = "Sleight of Hand"),
 	STEALTH					UMETA(DisplayName = "Stealth"),
 	SURVIVAL				UMETA(DisplayName = "Survival"),
-	SKILL_COUNT				UMETA(DisplayName = "None")
+	COUNT					UMETA(DisplayName = "None")
 };
 
 UENUM(Blueprintable, BlueprintType)
@@ -45,12 +45,12 @@ enum class EAbility : uint8
 	WISDOM				UMETA(DisplayName = "Wisdom"),
 	INTELLIGENCE		UMETA(DisplayName = "Intelligence"),
 	CHARISMA			UMETA(DisplayName = "Charisma"),
-	ABILITY_COUNT		UMETA(DisplayName = "None")
+	COUNT				UMETA(DisplayName = "None")
 };
 
 
 
-UCLASS(ClassGroup = "DnD", meta = (BlueprintSpawnableComponent))
+UCLASS(ClassGroup = "DnD", meta = (BlueprintSpawnableComponent, DisplayName = "DND Skills System"))
 class CHARACTERDIARY_API UDNDSkillsSystemComponent : public USkillsSystemComponent
 {
 	GENERATED_BODY()

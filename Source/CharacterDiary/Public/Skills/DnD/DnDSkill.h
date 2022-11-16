@@ -8,10 +8,26 @@
 #include "DnDSkill.generated.h"
 
 class UDNDSkillsSystemComponent;
+
+
+
+UENUM(Blueprintable, BlueprintType)
+enum class ESkillImprovementOrigin : uint8
+{
+	RACE				UMETA(DisplayName = "From Race"),
+	CLASS				UMETA(DisplayName = "From Skill"),
+	ABILITY				UMETA(DisplayName = "Ability"),
+	PROFICIENCY			UMETA(DisplayName = "Proficiency"),
+	ITEMS				UMETA(DisplayName = "Item"),
+	PLATINUM			UMETA(DisplayName = "Platinum"),
+	COUNT				UMETA(DisplayName = "None")
+};
+
+
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType, Blueprintable, ClassGroup = "DnD", meta = (DisplayName = "DND Skill"))
 class CHARACTERDIARY_API UDnD_Skill : public UISkill
 {
 	GENERATED_BODY()
@@ -23,6 +39,10 @@ public:
 	void UpdateProficiency(bool newValue);
 	
 	virtual int GetModifier_Implementation() override;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
+	TMap<ESkillImprovementOrigin, int32> GetModifier_FullInfo();
+
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	UIAbility* CorrespondingAbility;
 

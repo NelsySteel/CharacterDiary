@@ -6,7 +6,7 @@
 #include "IInventoryComponentLogic.h"
 #include "UObject/NoExportTypes.h"
 #include "IInventoryObject.generated.h"
-class UIInventoryItemInfoDataAsset;
+class UIInventoryItemInfoObject;
 /**
  * 
  */
@@ -18,36 +18,34 @@ class CHARACTERDIARY_API UIInventoryObject : public UObject
 public:
 	UIInventoryObject();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Components")
-	void OnConstruct(TSubclassOf<UIInventoryComponentLogic> subclass);
-
 	UFUNCTION(BlueprintCallable, Category="Components")
 	UIInventoryComponentLogic* GetComponentOfClass(TSubclassOf<UIInventoryComponentLogic> subclass);
-	
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Components")
-	TArray<UIInventoryItemInfoDataAsset*>	Components;
+	UFUNCTION(BlueprintCallable, BlueprintCallable, Category = "Components")
+	UIInventoryComponentLogic* CreateAndAddLogic(TSubclassOf<UIInventoryComponentLogic> logicClass, FName LogicName);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintCallable, Category = "Components")
+	void AddLogic(UIInventoryComponentLogic* logic);
 
 	UPROPERTY(BlueprintReadOnly, Category = "Components")
 	TArray<UIInventoryComponentLogic*>	ComponentsLogics;
 public:
 	template <class TComponentClass>
-	TComponentClass* GetComponentOfClass(TSubclassOf<UIInventoryComponentLogic> subclass = TComponentClass::StaticClass());
-private:
-	bool CreateAndAddLogic(UIInventoryItemInfoDataAsset*  data);
+	TComponentClass* GetComponentOfClass(TSubclassOf<UIInventoryComponentLogic> logicClass = TComponentClass::StaticClass());
+
 	
 };
 
 template <class TComponentClass>
-TComponentClass* UIInventoryObject::GetComponentOfClass(TSubclassOf<UIInventoryComponentLogic> subclass)
+TComponentClass* UIInventoryObject::GetComponentOfClass(TSubclassOf<UIInventoryComponentLogic> logicClass)
 {
 	UIInventoryComponentLogic** FoundComponentPtr = ComponentsLogics.FindByPredicate([&](const UIInventoryComponentLogic* Object)
 	{
-		return Cast<TComponentClass>(Object) != nullptr && Object->GetClass() == subclass;
+		return Cast<TComponentClass>(Object) != nullptr && Object->GetClass() == logicClass;
 	}
 	);
-	UIInventoryComponentLogic* FoundComponent = *FoundComponentPtr;
-	if (FoundComponent)
+	if (UIInventoryComponentLogic* FoundComponent = *FoundComponentPtr)
 	{
 		return Cast<TComponentClass>(FoundComponent);
 	}

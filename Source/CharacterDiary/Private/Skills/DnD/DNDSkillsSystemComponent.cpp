@@ -52,6 +52,7 @@ UIAbility* UDNDSkillsSystemComponent::CreateAbilityObject_Implementation(EAbilit
 	auto AbilityObject = NewObject<UIAbility>(this, UIAbility::StaticClass(), FName(AbilityNames[abilityIndex]));
 	AbilityObject->Name = AbilityNames[abilityIndex];
 	AbilityObject->Modifier = 10;
+
 	return AbilityObject;
 }
 
@@ -59,17 +60,17 @@ void UDNDSkillsSystemComponent::Initialize_Implementation()
 {
 	Super::Initialize_Implementation();
 
-	for (int i = 0; i <= static_cast<uint8>(EAbility::ABILITY_COUNT); i++)
+	for (int i = 0; i <= static_cast<uint8>(EAbility::COUNT); i++)
 	{
 		EAbility abilityEnum = static_cast<EAbility>(i);
 		Abilities.Add(abilityEnum, CreateAbilityObject(abilityEnum));
 	}
 
-	for (int i = 0; i <= static_cast<uint8>(ESkill::SKILL_COUNT); i++)
+	for (int i = 0; i <= static_cast<uint8>(ESkill::COUNT); i++)
 	{
 		FString skillName = SkillNames[i];
 		ESkill skillEnum = static_cast<ESkill>(i);
-		Skills.Add(skillEnum, CreateSkill(i, skillName, 0, skillEnum != ESkill::SKILL_COUNT ? SkillCategories[skillEnum] : EAbility::ABILITY_COUNT, false));
+		Skills.Add(skillEnum, CreateSkill(i, skillName, 0, skillEnum != ESkill::COUNT ? SkillCategories[skillEnum] : EAbility::COUNT, false));
 	}
 
 }

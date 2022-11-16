@@ -18,7 +18,7 @@ public:
 	UIAbility();
 	~UIAbility();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Data")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Skill Data")
 		int32  GetModifier();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
