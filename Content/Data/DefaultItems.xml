@@ -6,5 +6,18 @@
             <Amount>1</Amount>
             <Cost>10</Cost>
         </BaseInfo>
+        <DamageInfo>
+            <Traits>
+                <Trait>Light</Trait>
+                <Trait>Versatile</Trait>
+            </Traits>
+            <DamageOptions>
+                <DamageOption>
+                    <AttackDesc>Base Attack</AttackDesc>
+                    <DamageType>Piercing</DamageType>
+                    <Damage>1d6</Damage>
+                </DamageOption>
+            </DamageOptions>
+        </DamageInfo>
     </sword>
 </items>

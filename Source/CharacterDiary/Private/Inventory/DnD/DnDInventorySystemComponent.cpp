@@ -4,6 +4,7 @@
 #include "Inventory/DnD/DnDInventorySystemComponent.h"
 
 #include "Inventory/DnD/DnDInventoryLogicBaseInfo.h"
+#include "Inventory/DnD/DNDInventoryLogicDamage.h"
 
 TMap<FString, TSubclassOf<UIInventoryComponentLogic>> UDnDInventorySystemComponent::ComponentsMap = UDnDInventorySystemComponent::InitComponentsMap();
 
@@ -15,6 +16,7 @@ TMap<FString, TSubclassOf<UIInventoryComponentLogic>> UDnDInventorySystemCompone
 	TMap<FString, TSubclassOf<UIInventoryComponentLogic>> result;
 
 	result.Add("BaseInfo", UDnDInventoryLogicBaseInfo::StaticClass());
+	result.Add("DamageInfo", UDnDInventoryLogicDamage::StaticClass());
 
 	return result;
 }
