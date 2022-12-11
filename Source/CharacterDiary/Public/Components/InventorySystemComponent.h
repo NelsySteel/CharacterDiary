@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Inventory/BaseCurrency.h"
 #include "InventorySystemComponent.generated.h"
 
 

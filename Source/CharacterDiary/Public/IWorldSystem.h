@@ -5,6 +5,15 @@
 #include "CoreMinimal.h"
 #include "IWorldSystem.generated.h"
 
+
+UENUM(Blueprintable, BlueprintType)
+enum class System : uint8
+{
+	DND			UMETA(DisplayName = "DnD"),
+	Systems_COUNT		UMETA(DisplayName = "None")
+};
+
+
 class UInventorySystemComponent;
 class USkillsSystemComponent;
 class UISkill;
